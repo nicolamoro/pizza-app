@@ -1,5 +1,5 @@
 import React from "react";
-import { Jumbotron as Jumbo, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import pizzaHeaderImg from "../images/pizzaHeader.jpg";
 
@@ -29,16 +29,19 @@ const Styles = styled.div`
 
 const Jumbotron = ({ title, subtitle, total }) => (
   <Styles>
-    <Jumbo fluid className="jumbo sticky-top">
+    <div className="bg-light rounded-3 jumbo sticky-top">
       <div className="overlay"></div>
-      <Container>
-        <h4>{title}</h4>
-        <p>{subtitle}</p>
-      </Container>
-      <div hidden={!total} className="float-right mr-3">
+      <div
+        hidden={!total}
+        style={{ position: "absolute", top: "115px", right: "10px" }}
+      >
         Total: {total ? total.toFixed(2) : ""}&euro;
       </div>
-    </Jumbo>
+      <Container>
+        <h4 className="text-nowrap">{title}</h4>
+        <p>{subtitle}</p>
+      </Container>
+    </div>
   </Styles>
 );
 

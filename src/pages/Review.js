@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Table, Alert } from "react-bootstrap";
 import Jumbotron from "../components/Jumbotron";
@@ -11,14 +11,14 @@ const Review = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onCheckout = () => {
+  const onCheckout = useCallback(() => {
     setConfirmed(true);
-  };
+  }, []);
 
-  const onRestart = () => {
+  const onRestart = useCallback(() => {
     dispatch(cleanupOrder());
     navigate("/");
-  };
+  }, [dispatch, navigate]);
 
   return (
     <>
@@ -32,7 +32,7 @@ const Review = () => {
           possible!
         </div>
       </Alert>
-      <div className="w-25 mx-auto text-center">
+      <div className="w-50 mx-auto text-center">
         <Table striped className="mt-4">
           <tbody>
             <tr>
@@ -45,7 +45,7 @@ const Review = () => {
                     style={{ whiteSpace: "nowrap" }}
                   >
                     <i className="material-icons right">navigate_next</i>
-                    CHANGE
+                    EDIT
                   </Button>
                 </Link>
               </td>
@@ -72,7 +72,7 @@ const Review = () => {
                     style={{ whiteSpace: "nowrap" }}
                   >
                     <i className="material-icons right">navigate_next</i>
-                    CHANGE
+                    EDIT
                   </Button>
                 </Link>
               </td>
@@ -93,11 +93,13 @@ const Review = () => {
             </tr>
           </tbody>
         </Table>
-        <Button hidden={confirmed} className="my-1" onClick={onCheckout}>
+      </div>
+      <div className="text-center mt-4">
+        <Button hidden={confirmed} className="my-2" onClick={onCheckout}>
           <i className="material-icons left">shopping_cart</i>PROCEED TO
           CHECKOUT
         </Button>
-        <Button hidden={!confirmed} className="my-1" onClick={onRestart}>
+        <Button hidden={!confirmed} className="my-2" onClick={onRestart}>
           <i className="material-icons left">replay</i>RESTART
         </Button>
       </div>

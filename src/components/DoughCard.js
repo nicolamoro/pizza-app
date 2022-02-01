@@ -2,13 +2,14 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 
 const DoughCard = ({ item, selected, onSelectDough }) => (
-  <Card key={item.id} className="rounded text-left" style={{ width: "18rem" }}>
+  <Card key={item.id} className="rounded text-left " style={{ width: "18rem" }}>
     <Card.Img
       variant="top"
       src={item.image}
       style={{ height: "10rem", objectFit: "cover" }}
     />
     <div
+      style={{ position: "absolute", top: "10rem", right: "2px" }}
       hidden={!selected}
       className="float-right btn-floating waves-effect waves-light green mt-2 mr-2"
     >
